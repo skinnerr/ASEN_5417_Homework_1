@@ -24,8 +24,8 @@ function [] = Problem_A()
     fprintf('LHS: %28.20e with n=10\n',  v10);
     fprintf('LHS: %28.20e with n=100\n', v100);
     
-    re10  = abs(rhs - v10)  / rhs;
-    re100 = abs(rhs - v100) / rhs;
+    re10  = RelErr(v10,  rhs);
+    re100 = RelErr(v100, rhs);
     fprintf('re:  %28.20e with n=10\n',  re10);
     fprintf('re:  %28.20e with n=100\n', re100);
     
@@ -39,8 +39,8 @@ function [] = Problem_A()
     fprintf('LHS: %28.20e with n=20\n',  v20);
     fprintf('LHS: %28.20e with n=200\n', v200);
     
-    re20  = abs(rhs - v20)  / rhs;
-    re200 = abs(rhs - v200) / rhs;
+    re20  = RelErr(v20,  rhs);
+    re200 = RelErr(v200, rhs);
     fprintf('re:  %28.20e with n=20\n',  re20);
     fprintf('re:  %28.20e with n=200\n', re200);
     
@@ -48,13 +48,13 @@ function [] = Problem_A()
     
     % Use Richardson extrapolation on each set.
     
-    ve1 = v20  + (v20  - v10 ) / 3;
-    ve2 = v200 + (v200 - v100) / 3;
+    ve1 = v20  + (v20  - v10 ) / 15;
+    ve2 = v200 + (v200 - v100) / 15;
     fprintf('LHS: %28.20e with n={10, 20}  (Richardson)\n', ve1);
     fprintf('LHS: %28.20e with n={100,200} (Richardson)\n', ve2);
     
-    reR1 = abs(rhs - ve1) / rhs;
-    reR2 = abs(rhs - ve2) / rhs;
+    reR1 = RelErr(ve1, rhs);
+    reR2 = RelErr(ve2, rhs);
     fprintf('re:  %28.20e with n={10, 20}  (Richardson)\n', reR1);
     fprintf('re:  %28.20e with n={100,200} (Richardson)\n', reR2);
    

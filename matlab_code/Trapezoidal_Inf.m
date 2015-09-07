@@ -30,7 +30,7 @@ function [ F ] = Trapezoidal_Inf( f, min_x, n_slabpp, T, tol, y0 )
     epsilon = inf;
     while epsilon > tol
         
-        fprintf('Period: %5i\n', period_i);
+%         fprintf('Period: %5i\n', period_i);
         
         % This period's contribution to the integral.
         F_T = 0;
