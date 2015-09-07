@@ -1,4 +1,4 @@
-function [ F ] = Trapezoidal_Inf( f, min_x, n_slabpp, T, tol, y0 )
+function [ F ] = Trapezoidal_Inf( f, min_x, n_slabpp, T, n_periods, y0 )
 
 %%%
 %
@@ -27,10 +27,7 @@ function [ F ] = Trapezoidal_Inf( f, min_x, n_slabpp, T, tol, y0 )
     % Value of the integral.
     F = 0;
 
-    epsilon = inf;
-    while epsilon > tol
-        
-%         fprintf('Period: %5i\n', period_i);
+    while period_i < n_periods
         
         % This period's contribution to the integral.
         F_T = 0;
@@ -61,9 +58,6 @@ function [ F ] = Trapezoidal_Inf( f, min_x, n_slabpp, T, tol, y0 )
         
         % Move to the next period.
         period_i = period_i + 1;
-        
-        % Update epsilon (percentage contribution of current period to total integral).
-        epsilon = abs(F_T) / F;
         
     end
 

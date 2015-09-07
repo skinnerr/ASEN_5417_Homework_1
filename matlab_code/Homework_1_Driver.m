@@ -5,6 +5,8 @@ function [] = Homework_1_Driver()
 % Run this file to calculate output for Homework 1.
 %%%
 
+Set_Default_Plot_Properties();
+
 Blanks();
 
 Problem('A');
@@ -13,6 +15,10 @@ Blanks();
 
 Problem('B');
 Problem_B();
+Blanks();
+
+Problem('C');
+Problem_C();
 Blanks();
 
 end
