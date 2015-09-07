@@ -30,12 +30,14 @@ function [ F ] = Trapezoidal_Inf( f, min_x, n_slabpp, T, tol, y0 )
     epsilon = inf;
     while epsilon > tol
         
+        fprintf('Period: %5i\n', period_i);
+        
         % This period's contribution to the integral.
         F_T = 0;
         
-        x = linspace(min_x +  period_i      * T, ...
-                     min_x + (period_i + 1) * T, ...
-                     n_ppp);
+        a = min_x +  period_i      * T;
+        b = min_x + (period_i + 1) * T;
+        x = linspace(a, b, n_ppp);
                  
         h = x(2) - x(1);
     
@@ -62,5 +64,7 @@ function [ F ] = Trapezoidal_Inf( f, min_x, n_slabpp, T, tol, y0 )
         
         % Update epsilon (percentage contribution of current period to total integral).
         epsilon = abs(F_T) / F;
+        
+    end
 
 end
