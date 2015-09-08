@@ -16,10 +16,12 @@ function [] = Problem_A()
     
     Dashes();
     
-    % Calculate the LHS with n = {10, 100};
+    % Calculate the LHS with n = {10, 100}.
+    % Note: this corresponds to {5, 50} large slabs over which Simpson's method operates
+    %   (dividing each slab into two intervals).
     
-    v10  = Simpsons(f, [0,2*pii], 10);
-    v100 = Simpsons(f, [0,2*pii], 100);
+    v10  = Simpsons(f, [0,2*pii], 5);
+    v100 = Simpsons(f, [0,2*pii], 50);
     
     fprintf('LHS: %28.20e with n=10\n',  v10);
     fprintf('LHS: %28.20e with n=100\n', v100);
@@ -32,9 +34,11 @@ function [] = Problem_A()
     Dashes();
     
     % Double the grid points, and re-calculate the LHS.
+    % Note: this corresponds to {5, 50} large slabs over which Simpson's method operates
+    %   (dividing each slab into two intervals).
     
-    v20  = Simpsons(f, [0,2*pii], 20);
-    v200 = Simpsons(f, [0,2*pii], 200);
+    v20  = Simpsons(f, [0,2*pii], 10);
+    v200 = Simpsons(f, [0,2*pii], 100);
     
     fprintf('LHS: %28.20e with n=20\n',  v20);
     fprintf('LHS: %28.20e with n=200\n', v200);

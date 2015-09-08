@@ -35,12 +35,11 @@ We solve the following problems to better understand the tools of numerical inte
 
 \subsection{Problem A}
 
-We wish to show that the following equality holds for $a = 1/2$:
+We wish to show that the equality
 \begin{equation}
 \int_{0}^{2\pi} \frac{dx}{1 + a \cos x} = \frac{2\pi}{\sqrt{1-a^2}}, \qquad a^2 < 1
-.
 \end{equation}
-This is a relatively simple finite integral of a continuous function with no singularities.
+holds for $a = \tfrac{1}{2}$. This is a relatively simple finite integral of a continuous function with no singularities.
 
 \subsection{Problem B}
 
@@ -80,7 +79,18 @@ As in the first problem, these expressions involve well-behaved integrands and f
 
 \section{Methodology}
 
+Versions of the trapezoidal method, Simpson's method, and Richardson extrapolation are all implemented in \textsc{Matlab}. The following problems employ a subset of these methods in their solution.
 
+The value of $\pi$ used for calculations is always obtained through the equality $\pi = 4 \arctan(1)$.
+
+\subsection{Problem A}
+
+To solve this problem, we use Simpson's method with $N_1=\{10,20\}$ and $N_2=\{100,200\}$ equally-spaced parts. That is, we split the interval $x \in [0,2\pi]$ with equally spaced points $x_i, i \in [0,N]$ such that $x_0 = 0$ and $x_N = 2\pi$. In all cases, we calculate the relative error as
+\begin{equation}
+e_r = \frac{\left| f_e - f_c \right|}{f_e}
+,
+\end{equation}
+where $f_e$ is the exact value of the integral and $f_c$ is the computed value. We then apply Richardson extrapolation to the sets $N_1$ and $N_2$.
 
 \section{Results}
 
