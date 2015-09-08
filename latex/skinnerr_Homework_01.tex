@@ -17,30 +17,90 @@
 \rfoot{Ryan Skinner}
 
 \noindent
-{\Large \color{blue} Homework 1}
+{\Large Homework 1}
 \hfill
 {\large Ryan Skinner}
 \\[0.5ex]
 {\large ASEN 5417: Numerical Methods}
 \hfill
-{\large Due 2015/09/08}
+{\large Due 2015/09/08}\\
 \hrule
 \vspace{12pt}
 
 \section{Introduction}
 
+When integrating functions of one or more variables, analytic solutions are desired because they offer a complete description of solution behavior. For most situations of engineering interest, however, the governing equations defy all attempts to obtain a closed solution. In such instances, numerical integration provides a tool for exploring the solution space.
+
+We solve the following problems to better understand the tools of numerical integration. As will be described in the methods section, our tools include the trapezoidal method, Simpson's method, and Richardson extrapolation.
+
+\subsection{Problem A}
+
+We wish to show that the following equality holds for $a = 1/2$:
+\begin{equation}
+\int_{0}^{2\pi} \frac{dx}{1 + a \cos x} = \frac{2\pi}{\sqrt{1-a^2}}, \qquad a^2 < 1
+.
+\end{equation}
+This is a relatively simple finite integral of a continuous function with no singularities.
+
+\subsection{Problem B}
+
+We wish to confirm the equalities
+\begin{equation}
+\text{(i)} \quad
+\int_{0}^{\infty} \frac{\sin^4 x}{x^4} \; dx = \frac{\pi}{3}
+,
+\qquad
+\text{and}
+\qquad
+\text{(ii)} \quad
+\int_{0}^{\infty} \frac{\sin x}{\sqrt{x}} \; dx = \sqrt{\frac{\pi}{2}}
+.
+\end{equation}
+Note that both integrands are indeterminate at $x=0$ and otherwise periodic, and that both integrals extend indefinitely. Particular care will need to be paid to singularities and periodicity.
+
+\subsection{Problem C}
+
+Moving to functions of two variables, we wish to estimate
+\begin{equation}
+I = \int_1^3 \int_1^2 f(x,y) \; dx \; dy
+\end{equation}
+for the integrands
+\begin{equation}
+\text{(i)} \quad
+f(x,y) = x y (1+x)
+,
+\qquad
+\text{and}
+\qquad
+\text{(ii)} \quad
+f(x,y) = x^2 y^3 (1+x)
+.
+\end{equation}
+As in the first problem, these expressions involve well-behaved integrands and finite bounds. Application of our chosen numerical method over a two-dimensional domain will be the crux of this problem.
+
 \section{Methodology}
+
+
 
 \section{Results}
 
-\section{Discussion and Conclusion}
+\section{Discussion}
 
 \section{References}
 
 \section*{Appendix: MATLAB Code}
 The following code listings generate all figures presented in this homework assignment.
 
-\includecode{test.m}
+\includecode{Homework_1_Driver.m}
+\includecode{RelErr.m}
+\includecode{Problem_A.m}
+\includecode{Simpsons.m}
+\includecode{Problem_B.m}
+\includecode{Trapezoidal_Inf.m}
+\includecode{Problem_C.m}
+\includecode{Simpsons_2D.m}
+\includecode{Set_Default_Plot_Properties.m}
+\includecode{Dashes.m}
 
 %\begin{figure}[h!]
 %\begin{center}
