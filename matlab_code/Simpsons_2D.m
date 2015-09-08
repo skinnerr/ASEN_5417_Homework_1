@@ -10,7 +10,7 @@ function [ F ] = Simpsons_2D( f, bounds_x, bounds_y, n_slabs_x, n_slabs_y )
     z = zeros(n_pts_x, n_pts_y);
     for i = 1:n_pts_x
     for j = 1:n_pts_y
-        z(i,j) = feval(f, x(i), y(i));
+        z(i,j) = feval(f, x(i), y(j));
     end
     end
     

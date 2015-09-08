@@ -29,7 +29,7 @@ function [] = Problem_B()
     slabspp = 4;
     y0      = 1;
     
-    pers = (1:9)' * 10.^(0:2);
+    pers = (1:9)' * 10.^(0:3);
     pers = reshape(pers, 1, numel(pers));
     F1   = zeros(1, length(pers));
     F2   = zeros(1, length(pers));
