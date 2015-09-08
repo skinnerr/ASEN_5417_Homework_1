@@ -15,7 +15,7 @@ function [] = Problem_B()
     f = @(x) sin(x)^4 / x^4;
     
     figure();
-    x = linspace(0,25);
+    x = linspace(0,10,500);
     y = zeros(0,length(x));
     for i = 1:length(x)
         y(i) = f(x(i));
@@ -26,35 +26,36 @@ function [] = Problem_B()
     legend('sin(x)^4 / x^4');
     
     min_x   = 0;
-    slabspp = 4;
+    max_x   = 8*pi;
     y0      = 1;
     
-    pers = (1:9)' * 10.^(0:3);
-    pers = reshape(pers, 1, numel(pers));
-    F1   = zeros(1, length(pers));
-    F2   = zeros(1, length(pers));
-    Fe   = zeros(1, length(pers));
+    n = 1:30;
+    F1   = zeros(1, length(n));
+    F2   = zeros(1, length(n));
+    Fe   = zeros(1, length(n));
     
-    for i = 1:length(pers)
+    for i = 1:length(n)
         
-        per = pers(i);
+        n_current = n(i);
     
-        F1(i) = Trapezoidal_Inf(f, min_x, slabspp,   2*pii, per, y0);
-        F2(i) = Trapezoidal_Inf(f, min_x, slabspp*2, 2*pii, per, y0);
-        Fe(i) = F2(i) + (F2(i) - F1(i)) / 3;
+        F1(i) = Trapezoidal_Inf(f, min_x, max_x, n_current,   y0);
+        F2(i) = Trapezoidal_Inf(f, min_x, max_x, n_current*2, y0);
     
     end
+    
+    Fe = F2 + (F2 - F1) / 3;
 
     re1 = RelErr(F1, rhs);
     re2 = RelErr(F2, rhs);
     ree = RelErr(Fe, rhs);
     
     figure();
-    loglog(pers, re1, pers, re2, pers, ree);
-    xlim([min(pers),max(pers)]);
-    xlabel('Periods Integrated');
+    loglog(n, re1, n, ree);
+    xlim([min(n),max(n)]);
+    ylim([1e-6, 1]);
+    xlabel('Number of Slabs');
     ylabel('Relative Error');
-    legend('4 Slabs / Period', '8 Slabs / Period', 'Richardson Extrapolation');
+    legend('Trapezoidal Rule', 'Richardson with h1/h2 = 2', 'Location', 'southwest');
     
     %%%%%%%%%%%%%
     % Part (ii) %
@@ -68,7 +69,7 @@ function [] = Problem_B()
     f = @(x) sin(x) / sqrt(x);
     
     figure();
-    x = linspace(0,500,5000);
+    x = linspace(0,100,20000);
     y = zeros(0,length(x));
     for i = 1:length(x)
         y(i) = f(x(i));
@@ -79,69 +80,34 @@ function [] = Problem_B()
     legend('sin(x) / sqrt(x)');
     
     min_x   = 0;
+    max_x   = 300*pi;
     y0      = 1;
     
-    % Do slabs/period = {4, 8}.
+    n = 1000:1000:25000;
+    F1   = zeros(1, length(n));
+    F2   = zeros(1, length(n));
     
-    slabspp = 4;
-    
-    pers = (1:9)' * 10.^(0:2);
-    pers = reshape(pers, 1, numel(pers));
-    F1   = zeros(1, length(pers));
-    F2   = zeros(1, length(pers));
-    Fe   = zeros(1, length(pers));
-    
-    for i = 1:length(pers)
+    for i = 1:length(n)
         
-        per = pers(i);
+        n_current = n(i);
+        disp(n_current);
     
-        F1(i) = Trapezoidal_Inf(f, min_x, slabspp,   2*pii, per, y0);
-        F2(i) = Trapezoidal_Inf(f, min_x, slabspp*2, 2*pii, per, y0);
-        Fe(i) = F2(i) + (F2(i) - F1(i)) / 3;
+        F1(i) = Trapezoidal_Inf(f, min_x, max_x, n_current,   y0);
+        F2(i) = Trapezoidal_Inf(f, min_x, max_x, n_current*2, y0);
     
     end
+    
+    Fe = F2 - (F2 - F1) / 3;
 
     re1 = RelErr(F1, rhs);
     re2 = RelErr(F2, rhs);
     ree = RelErr(Fe, rhs);
     
     figure();
-    loglog(pers, re1, pers, re2, pers, ree);
-    xlim([min(pers),max(pers)]);
-    xlabel('Periods Integrated');
+    loglog(n, re1, n, ree);
+    xlim([min(n),max(n)]);
+    xlabel('Number of Slabs');
     ylabel('Relative Error');
-    legend('4 Slabs / Period', '8 Slabs / Period', 'Richardson Extrapolation');
-    
-    % Do slabs/period = {22, 44}.
-    
-    slabspp = 22;
-    
-    pers = (1:9)' * 10.^(0:2);
-    pers = reshape(pers, 1, numel(pers));
-    pers = 1:150;
-    F1   = zeros(1, length(pers));
-    F2   = zeros(1, length(pers));
-    Fe   = zeros(1, length(pers));
-    
-    for i = 1:length(pers)
-        
-        per = pers(i);
-    
-        F1(i) = Trapezoidal_Inf(f, min_x, slabspp,   2*pii, per, y0);
-        F2(i) = Trapezoidal_Inf(f, min_x, slabspp*2, 2*pii, per, y0);
-        Fe(i) = F2(i) + (F2(i) - F1(i)) / 3;
-    
-    end
-
-    re1 = RelErr(F1, rhs);
-    re2 = RelErr(F2, rhs);
-    ree = RelErr(Fe, rhs);
-    
-    figure();
-    loglog(pers, re1, pers, re2, pers, ree);
-    xlim([min(pers),max(pers)]);
-    xlabel('Periods Integrated');
-    ylabel('Relative Error');
-    legend('28 Slabs / Period', '56 Slabs / Period', 'Richardson Extrapolation');
+    legend('Trapezoidal Rule', 'Richardson with h1/h2 = 2', 'Location', 'northeast');
    
 end
